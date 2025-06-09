@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+body {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem 3rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  width: 350px;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  outline: none;
+}
+button {
+  background: #ff9a9e;
+  background: linear-gradient(to right, #fad0c4, #ff9a9e);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #5e3b3b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+button:hover {
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: #fff;
+}
+#password {
+  margin-top: 1.5rem;
+  padding: 12px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 12px;
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+  user-select: all;
+  font-family: 'Courier New', Courier, monospace;
+}
+#copyBtn {
+  margin-top: 0.8rem;
+  background: #764ba2;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 40px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+#copyBtn:hover {
+  background: #667eea;
+}
+
