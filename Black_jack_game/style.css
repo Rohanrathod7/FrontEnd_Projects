@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    font-family: 'Play', sans-serif;
+    background-image: url("images/table.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.game-container {
+    background: rgba(47, 114, 94, 0.6);
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #00000088;
+    width: 90%;
+    max-width: 400px;
+}
+
+h1 {
+    color: goldenrod;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+#message-el {
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+#cards-el,
+#sum-el,
+#player-el {
+    font-size: 1.1rem;
+    margin: 8px 0;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+button {
+    background: goldenrod;
+    color: #003b1f;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #ffd700;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
