@@ -1,12 +1,51 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <input type="text" id="input-el">
-        <button id="input-btn">SAVE INPUT</button>
-        <ul id="ul-el">
-        </ul>
-        <script src="./index.js"></script>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Retro Link Collector</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="sky-background">
+        <div class="container">
+            <h1>Link Collector</h1>
+
+            <!-- Input Field -->
+            <input type="text" id="input-el" placeholder="Enter a URL...">
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button id="input-btn">Add Link</button>
+                <button id="tab-btn">Add Current Tab</button>
+                <button id="delete-btn">Delete All Random</button>
+            </div>
+
+            <!-- Random Links List -->
+            <ul id="ul-el" class="link-list">
+                <!-- Random links will appear here -->
+            </ul>
+
+            <!-- Custom List Container -->
+            <div id="custom-lists">
+                <!-- Batch Action Buttons -->
+            <div class="batch-actions">
+                   <button id="open-selected" title="Open Selected"><i class="fas fa-external-link-alt"></i></button>
+                    <button id="delete-selected" title="Delete Selected"><i class="fas fa-trash"></i></button>
+            </div>
+
+                <!-- Dynamic custom dropdowns go here -->
+            </div>
+
+            <!-- Add Custom List Section -->
+            <div class="add-list-wrapper">
+                <input type="text" id="new-list-name" placeholder="New list name">
+                <button id="add-list-btn">Create List</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
 </html>

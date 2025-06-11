@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 420px;
+            min-height: 600px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            background: linear-gradient(135deg, #ff6b9d, #ffa726, #42a5f5, #ab47bc);
+            background-size: 400% 400%;
+            animation: gradientShift 8s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .floating-clouds {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            animation: float 20s linear infinite;
+        }
+
+        .cloud:nth-child(1) {
+            width: 60px;
+            height: 20px;
+            top: 10%;
+            animation-delay: 0s;
+        }
+
+        .cloud:nth-child(2) {
+            width: 40px;
+            height: 15px;
+            top: 30%;
+            animation-delay: -5s;
+        }
+
+        .cloud:nth-child(3) {
+            width: 80px;
+            height: 25px;
+            top: 60%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(500px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            height: 100%;
+        }
+
+        .title {
+            text-align: center;
+            color: #ffff00;
+            text-shadow: 2px 2px 0px #ff0080;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .input-section {
+            margin-bottom: 20px;
+        }
+
+        #input-el {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ffff;
+            border-radius: 4px;
+            color: #00ffff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            margin-bottom: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        #input-el:focus {
+            outline: none;
+            border-color: #ffff00;
+            box-shadow: inset 0 0 15px rgba(255, 255, 0, 0.5);
+        }
+
+        .button-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff0080, #8000ff);
+            color: white;
+            border: 2px solid #ffff00;
+            padding: 8px 12px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 7px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            flex: 1;
+            min-width: 80px;
+            box-shadow: 0 4px 0 #4a0040;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #4a0040;
+            filter: brightness(1.2);
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #4a0040;
+        }
+
+        #delete-btn {
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            border-color: #ffff00;
+        }
+
+        .collection-section {
+            margin-bottom: 20px;
+        }
+
+        .add-collection-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #00ff80, #0080ff);
+            margin-bottom: 15px;
+        }
+
+        .collection {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .collection-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: rgba(0, 255, 255, 0.1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .collection-name {
+            flex: 1;
+            color: #00ffff;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .collection-name input {
+            background: transparent;
+            border: none;
+            color: #00ffff;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 8px;
+            width: 100%;
+        }
+
+        .collection-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        .small-btn {
+            padding: 4px 8px;
+            font-size: 6px;
+            min-width: auto;
+            box-shadow: 0 2px 0 #4a0040;
+        }
+
+        .open-all-btn {
+            background: linear-gradient(45deg, #00ff00, #008000);
+        }
+
+        .delete-collection-btn {
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+        }
+
+        .collection-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collection.expanded .collection-content {
+            max-height: 300px;
+        }
+
+        .collection-links {
+            padding: 10px;
+        }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 5px;
+            border-radius: 4px;
+            border-left: 3px solid #ff0080;
+        }
+
+        .link-checkbox {
+            margin-right: 10px;
+            transform: scale(0.8);
+        }
+
+        .link-url {
+            flex: 1;
+            color: #ffff00;
+            text-decoration: none;
+            word-break: break-all;
+            cursor: pointer;
+        }
+
+        .link-url:hover {
+            color: #00ffff;
+            text-shadow: 0 0 5px #00ffff;
+        }
+
+        .delete-link-btn {
+            background: linear-gradient(45deg, #ff4444, #cc0000);
+            padding: 2px 6px;
+            font-size: 5px;
+            margin-left: 8px;
+        }
+
+        .random-links {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #ff0080;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
+        }
+
+        .random-links h3 {
+            color: #ff0080;
+            margin-bottom: 15px;
+            text-align: center;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ff6b9d, #ffa726);
+            padding: 30px;
+            border: 3px solid #ffff00;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.5);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .scroll-area {
+            max-height: 200px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #ff0080 rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-area::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .scroll-area::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-area::-webkit-scrollbar-thumb {
+            background: #ff0080;
+            border-radius: 4px;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .link-item {
+            animation: slideIn 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-clouds">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">◊ CYBER LINKS ◊</h1>
+        
+        <div class="input-section">
+            <input type="text" id="input-el" placeholder="Enter URL to save...">
+            <div class="button-row">
+                <button id="input-btn">SAVE INPUT</button>
+                <button id="tab-btn">SAVE TAB</button>
+                <button id="all-tabs-btn">SAVE ALL TABS</button>
+                <button id="delete-btn">DELETE ALL</button>
+            </div>
+        </div>
+
+        <div class="collection-section">
+            <button class="add-collection-btn" id="add-collection-btn">+ NEW COLLECTION +</button>
+            <div id="collections-container"></div>
+        </div>
+
+        <div class="random-links">
+            <h3>◊ QUICK LINKS ◊</h3>
+            <div class="scroll-area" id="random-links-container"></div>
+        </div>
+    </div>
+
+    <!-- Modal for collection actions -->
+    <div id="action-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="modal-title">Select Action</h3>
+            <div class="modal-buttons">
+                <button id="modal-add-link">Add Link</button>
+                <button id="modal-add-tab">Add Current Tab</button>
+                <button id="modal-add-all-tabs">Add All Tabs</button>
+                <button id="modal-cancel">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation modal -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content">
+            <h3 id="confirm-title">Confirm Action</h3>
+            <p id="confirm-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-yes">YES</button>
+                <button id="confirm-no">NO</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let collections = [];
+        let randomLinks = [];
+        let currentCollectionId = null;
+
+        // DOM elements
+        const inputEl = document.getElementById("input-el");
+        const inputBtn = document.getElementById("input-btn");
+        const tabBtn = document.getElementById("tab-btn");
+        const allTabsBtn = document.getElementById("all-tabs-btn");
+        const deleteBtn = document.getElementById("delete-btn");
+        const addCollectionBtn = document.getElementById("add-collection-btn");
+        const collectionsContainer = document.getElementById("collections-container");
+        const randomLinksContainer = document.getElementById("random-links-container");
+        
+        // Modals
+        const actionModal = document.getElementById("action-modal");
+        const confirmModal = document.getElementById("confirm-modal");
+
+        // Initialize
+        loadData();
+        renderAll();
+
+        // Load data from localStorage
+        function loadData() {
+            const savedCollections = localStorage.getItem("linkCollections");
+            const savedRandomLinks = localStorage.getItem("randomLinks");
+            
+            if (savedCollections) {
+                collections = JSON.parse(savedCollections);
+            }
+            
+            if (savedRandomLinks) {
+                randomLinks = JSON.parse(savedRandomLinks);
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem("linkCollections", JSON.stringify(collections));
+            localStorage.setItem("randomLinks", JSON.stringify(randomLinks));
+        }
+
+        // Generate unique ID
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        // Add link to random links
+        inputBtn.addEventListener("click", function() {
+            const url = inputEl.value.trim();
+            if (url) {
+                randomLinks.push({
+                    id: generateId(),
+                    url: url,
+                    title: url
+                });
+                inputEl.value = "";
+                saveData();
+                renderRandomLinks();
+                playSound('add');
+            }
+        });
+
+        // Add current tab
+        tabBtn.addEventListener("click", function() {
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                randomLinks.push({
+                    id: generateId(),
+                    url: tabs[0].url,
+                    title: tabs[0].title || tabs[0].url
+                });
+                saveData();
+                renderRandomLinks();
+                playSound('add');
+            });
+        });
+
+        // Add all tabs
+        allTabsBtn.addEventListener("click", function() {
+            chrome.tabs.query({currentWindow: true}, function(tabs) {
+                tabs.forEach(tab => {
+                    randomLinks.push({
+                        id: generateId(),
+                        url: tab.url,
+                        title: tab.title || tab.url
+                    });
+                });
+                saveData();
+                renderRandomLinks();
+                playSound('add');
+            });
+        });
+
+        // Delete all confirmation
+        deleteBtn.addEventListener("dblclick", function() {
+            showConfirmModal("Delete Everything?", "This will delete all collections and random links!", function() {
+                collections = [];
+                randomLinks = [];
+                localStorage.clear();
+                renderAll();
+                playSound('delete');
+            });
+        });
+
+        // Add new collection
+        addCollectionBtn.addEventListener("click", function() {
+            const newCollection = {
+                id: generateId(),
+                name: "New Collection",
+                links: [],
+                expanded: false
+            };
+            collections.push(newCollection);
+            saveData();
+            renderCollections();
+            playSound('add');
+        });
+
+        // Show action modal
+        function showActionModal(collectionId) {
+            currentCollectionId = collectionId;
+            const collection = collections.find(c => c.id === collectionId);
+            document.getElementById("modal-title").textContent = `Add to: ${collection.name}`;
+            actionModal.style.display = "block";
+        }
+
+        // Modal event listeners
+        document.getElementById("modal-add-link").addEventListener("click", function() {
+            const url = prompt("Enter URL:");
+            if (url) {
+                addToCollection(currentCollectionId, url, url);
+            }
+            actionModal.style.display = "none";
+        });
+
+        document.getElementById("modal-add-tab").addEventListener("click", function() {
+            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+                addToCollection(currentCollectionId, tabs[0].url, tabs[0].title);
+            });
+            actionModal.style.display = "none";
+        });
+
+        document.getElementById("modal-add-all-tabs").addEventListener("click", function() {
+            chrome.tabs.query({currentWindow: true}, function(tabs) {
+                tabs.forEach(tab => {
+                    addToCollection(currentCollectionId, tab.url, tab.title);
+                });
+            });
+            actionModal.style.display = "none";
+        });
+
+        document.getElementById("modal-cancel").addEventListener("click", function() {
+            actionModal.style.display = "none";
+        });
+
+        // Confirmation modal listeners
+        document.getElementById("confirm-no").addEventListener("click", function() {
+            confirmModal.style.display = "none";
+        });
+
+        // Add link to collection
+        function addToCollection(collectionId, url, title) {
+            const collection = collections.find(c => c.id === collectionId);
+            if (collection) {
+                collection.links.push({
+                    id: generateId(),
+                    url: url,
+                    title: title || url
+                });
+                saveData();
+                renderCollections();
+                playSound('add');
+            }
+        }
+
+        // Show confirmation modal
+        function showConfirmModal(title, message, onConfirm) {
+            document.getElementById("confirm-title").textContent = title;
+            document.getElementById("confirm-message").textContent = message;
+            document.getElementById("confirm-yes").onclick = function() {
+                onConfirm();
+                confirmModal.style.display = "none";
+            };
+            confirmModal.style.display = "block";
+        }
+
+        // Open all links in collection
+        function openAllInCollection(collectionId) {
+            const collection = collections.find(c => c.id === collectionId);
+            if (collection && collection.links.length > 0) {
+                collection.links.forEach(link => {
+                    chrome.tabs.create({ url: link.url });
+                });
+                playSound('open');
+            }
+        }
+
+        // Delete collection
+        function deleteCollection(collectionId) {
+            showConfirmModal("Delete Collection?", "This will permanently delete this collection and all its links!", function() {
+                collections = collections.filter(c => c.id !== collectionId);
+                saveData();
+                renderCollections();
+                playSound('delete');
+            });
+        }
+
+        // Delete link from collection
+        function deleteLinkFromCollection(collectionId, linkId) {
+            const collection = collections.find(c => c.id === collectionId);
+            if (collection) {
+                collection.links = collection.links.filter(l => l.id !== linkId);
+                saveData();
+                renderCollections();
+                playSound('delete');
+            }
+        }
+
+        // Delete random link
+        function deleteRandomLink(linkId) {
+            randomLinks = randomLinks.filter(l => l.id !== linkId);
+            saveData();
+            renderRandomLinks();
+            playSound('delete');
+        }
+
+        // Toggle collection expansion
+        function toggleCollection(collectionId) {
+            const collection = collections.find(c => c.id === collectionId);
+            if (collection) {
+                collection.expanded = !collection.expanded;
+                saveData();
+                renderCollections();
+                playSound('click');
+            }
+        }
+
+        // Update collection name
+        function updateCollectionName(collectionId, newName) {
+            const collection = collections.find(c => c.id === collectionId);
+            if (collection) {
+                collection.name = newName;
+                saveData();
+            }
+        }
+
+        // Render all
+        function renderAll() {
+            renderCollections();
+            renderRandomLinks();
+        }
+
+        // Render collections
+        function renderCollections() {
+            let html = "";
+            collections.forEach(collection => {
+                html += `
+                    <div class="collection ${collection.expanded ? 'expanded' : ''}">
+                        <div class="collection-header" onclick="toggleCollection('${collection.id}')">
+                            <div class="collection-name">
+                                <input type="text" value="${collection.name}" 
+                                    onchange="updateCollectionName('${collection.id}', this.value)"
+                                    onclick="event.stopPropagation()">
+                            </div>
+                            <div class="collection-controls">
+                                <button class="small-btn" onclick="event.stopPropagation(); showActionModal('${collection.id}')">+</button>
+                                <button class="small-btn open-all-btn" onclick="event.stopPropagation(); openAllInCollection('${collection.id}')">OPEN</button>
+                                <button class="small-btn delete-collection-btn" onclick="event.stopPropagation(); deleteCollection('${collection.id}')">×</button>
+                            </div>
+                        </div>
+                        <div class="collection-content">
+                            <div class="collection-links scroll-area">
+                `;
+                
+                collection.links.forEach(link => {
+                    html += `
+                        <div class="link-item">
+                            <input type="checkbox" class="link-checkbox">
+                            <a class="link-url" href="${link.url}" target="_blank">${link.title}</a>
+                            <button class="small-btn delete-link-btn" onclick="deleteLinkFromCollection('${collection.id}', '${link.id}')">×</button>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            collectionsContainer.innerHTML = html;
+        }
+
+        // Render random links
+        function renderRandomLinks() {
+            let html = "";
+            randomLinks.forEach(link => {
+                html += `
+                    <div class="link-item">
+                        <input type="checkbox" class="link-checkbox">
+                        <a class="link-url" href="${link.url}" target="_blank">${link.title}</a>
+                        <button class="small-btn delete-link-btn" onclick="deleteRandomLink('${link.id}')">×</button>
+                    </div>
+                `;
+            });
+            randomLinksContainer.innerHTML = html;
+        }
+
+        // Play sound effect (visual feedback since extension can't play audio)
+        function playSound(type) {
+            // Create visual feedback
+            const feedback = document.createElement('div');
+            feedback.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #00ffff;
+                color: #000;
+                padding: 5px 10px;
+                border-radius: 4px;
+                font-size: 6px;
+                z-index: 9999;
+                animation: fadeOut 1s forwards;
+            `;
+            
+            const messages = {
+                'add': '+ ADDED',
+                'delete': '× DELETED', 
+                'open': '→ OPENED',
+                'click': '♦ CLICK'
+            };
+            
+            feedback.textContent = messages[type] || '♦ ACTION';
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => {
+                document.body.removeChild(feedback);
+            }, 1000);
+        }
+
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                0% { opacity: 1; transform: translateY(0); }
+                100% { opacity: 0; transform: translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target === actionModal) {
+                actionModal.style.display = "none";
+            }
+            if (event.target === confirmModal) {
+                confirmModal.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>
