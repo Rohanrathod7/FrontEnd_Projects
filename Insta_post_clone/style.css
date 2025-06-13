@@ -1,0 +1,91 @@
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      background: #fff;
+      color: #000;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em;
+      border-bottom: 1px solid #ccc;
+    }
+
+    header h1 {
+      font-family: cursive;
+      font-size: 1.5em;
+    }
+
+    header img {
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .post {
+      border-bottom: 10px solid #eee;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      padding: 1em;
+    }
+
+    .user-info img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .user-info .details {
+      font-size: 0.9em;
+    }
+
+    .post-img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      cursor: pointer;
+    }
+
+    .icons {
+      display: flex;
+      gap: 1em;
+      padding: 1em;
+      font-size: 1.4em;
+      cursor: pointer;
+    }
+
+    .icons i {
+      transition: color 0.2s ease;
+    }
+
+    .icons i:hover {
+      color: #ff4d4d;
+    }
+
+    .likes, .comment {
+      padding: 0 1em 1em 1em;
+      font-size: 0.9em;
+    }
+
+    .likes {
+      font-weight: bold;
+    }
+
+    .liked {
+      color: #ff4d4d !important;
+    }
+ 
