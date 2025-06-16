@@ -1,0 +1,72 @@
+<!-- post.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Journey as a Bootcamp Student</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <div class="logo">📝 My Learning Journal</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+        </ul>
+        <button class="hamburger">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="blog-post">
+      <p class="date">July 15, 2025</p>
+      <h1>My new journey as a bootcamp student.</h1>
+      <img src="images/blog-hero.jpg" alt="Desk setup" class="post-hero" />
+
+      <h2>How I stay committed to learning</h2>
+      <p>Learning to code consistently takes discipline and focus. I created a daily habit of coding for at least one hour every morning and learning through Scrimba’s well-structured Frontend Developer Career Path. The community and interactive style made it stick.</p>
+
+      <h2>How I got started</h2>
+      <p>I started with HTML & CSS basics, and moved on to JavaScript fundamentals. I took time to build real projects and publish them. Now, I'm diving into React and building apps I'm proud to showcase in my portfolio!</p>
+    </article>
+
+    <section class="recent-posts">
+      <h2>Recent Posts</h2>
+      <div class="posts-grid">
+        <div class="post-card">
+          <img src="images/blog1.jpg" alt="Blog 1" />
+          <p class="date">June 30, 2025</p>
+          <h3>Blog One</h3>
+          <a href="post.html">View More</a>
+        </div>
+        <div class="post-card">
+          <img src="images/blog2.jpg" alt="Blog 2" />
+          <p class="date">June 28, 2025</p>
+          <h3>Blog Two</h3>
+          <a href="post.html">View More</a>
+        </div>
+        <div class="post-card">
+          <img src="images/blog3.jpg" alt="Blog 3" />
+          <p class="date">June 25, 2025</p>
+          <h3>Blog Three</h3>
+          <a href="post.html">View More</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Learning Journal</p>
+  </footer>
+
+  <script>
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('show');
+    });
+  </script>
+</body>
+</html>

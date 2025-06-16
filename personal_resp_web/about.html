@@ -1,0 +1,69 @@
+<!-- about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me - My Learning Journal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div class="container nav-container">
+      <div class="logo">📝 My Learning Journal</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Me</a></li>
+        </ul>
+        <button class="hamburger">☰</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="about-me">
+      <img src="images/profile.jpg" alt="My Profile Picture" class="profile-img" />
+      <div>
+        <h1>Hi there! I'm Roku and welcome to my learning journal...</h1>
+        <p>I'm currently completing the Scrimba Front-End Developer Career Path. It’s been an amazing experience learning HTML, CSS, JavaScript, and React through their hands-on, interactive platform. This blog documents my journey, struggles, breakthroughs, and favorite projects.</p>
+        <p>Stay tuned as I build and share more experiences through projects, lessons, and real-world practice!</p>
+      </div>
+    </section>
+
+    <section class="recent-posts">
+      <h2>Recent Posts</h2>
+      <div class="posts-grid">
+        <div class="post-card">
+          <img src="images/blog1.jpg" alt="Blog 1" />
+          <p class="date">June 30, 2025</p>
+          <h3>Blog One</h3>
+          <a href="post.html">View More</a>
+        </div>
+        <div class="post-card">
+          <img src="images/blog2.jpg" alt="Blog 2" />
+          <p class="date">June 28, 2025</p>
+          <h3>Blog Two</h3>
+          <a href="post.html">View More</a>
+        </div>
+        <div class="post-card">
+          <img src="images/blog3.jpg" alt="Blog 3" />
+          <p class="date">June 25, 2025</p>
+          <h3>Blog Three</h3>
+          <a href="post.html">View More</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 My Learning Journal</p>
+  </footer>
+
+  <script>
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('show');
+    });
+  </script>
+</body>
+</html>
